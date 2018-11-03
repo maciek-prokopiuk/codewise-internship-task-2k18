@@ -5,7 +5,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MessageQueueTest {
-    private static MessageQueueComponent messenger = MessageQueueComponent.getInstance();
+    private static MessageQueueComponent messenger = new MessageQueueComponent();
 
     @BeforeClass
     public static void fillMessengerDeque(){

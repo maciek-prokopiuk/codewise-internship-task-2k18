@@ -9,18 +9,6 @@ import java.util.stream.Collectors;
 public final class MessageQueueComponent implements MessageQueue {
     private final LinkedBlockingDeque<MessageWrapper> mostRecentMessages = new LinkedBlockingDeque<>(100);
 
-    private MessageQueueComponent(){
-
-    }
-
-    private static class MessageQueueComponentGetter{
-        private static final MessageQueueComponent MESSAGE_QUEUE_COMPONENT_INSTANCE = new MessageQueueComponent();
-    }
-
-    public static MessageQueueComponent getInstance(){
-        return MessageQueueComponentGetter.MESSAGE_QUEUE_COMPONENT_INSTANCE;
-    }
-
     @Override
     public synchronized void add(Message message) {
         if(mostRecentMessages.remainingCapacity() > 0){
