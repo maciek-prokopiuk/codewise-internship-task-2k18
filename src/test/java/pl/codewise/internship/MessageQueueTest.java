@@ -21,7 +21,8 @@ public class MessageQueueTest {
 
     @Test
     public void testGetNumberOfErrors(){
-        messenger.add(new Message("321tseT", 34));
+        messenger.add(new Message("321tseT", 404));
+        messenger.add(new Message("321tseT", 200));
         Assert.assertEquals(1, messenger.numberOfErrorMessages());
     }
 }

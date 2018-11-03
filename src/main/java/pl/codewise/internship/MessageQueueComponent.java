@@ -27,7 +27,7 @@ public final class MessageQueueComponent implements MessageQueue {
     @Override
     public long numberOfErrorMessages() {
         return getMessagesWithinLastFiveMinutes().stream()
-                .filter(n -> n.getErrorCode() != 0)
+                .filter(n -> isErrorCode(n.getErrorCode()))
                 .count();
     }
 
@@ -40,6 +40,10 @@ public final class MessageQueueComponent implements MessageQueue {
 
     private boolean isNotOlderThanFiveMinutes(LocalDateTime then){
         return LocalDateTime.now().isBefore(then.plusMinutes(5));
+    }
+
+    private boolean isErrorCode(int errorCode){
+        return errorCode >= 400 && errorCode < 600;
     }
 
     private final class MessageWrapper{
