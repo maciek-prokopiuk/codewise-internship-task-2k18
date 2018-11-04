@@ -39,8 +39,10 @@ public class MessageQueueTest {
         ExecutorService executorService = Executors.newFixedThreadPool(threads);
         IntStream.range(0, 99).forEach(n -> executorService.submit(() ->
                         messageQueueComponentForThreads.add(new Message("Threads", 200))));
+
+        executorService.shutdown();
         try {
-            executorService.awaitTermination(1, TimeUnit.SECONDS);
+            executorService.awaitTermination(5, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
